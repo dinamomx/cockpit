@@ -330,6 +330,18 @@ class UtilArrayQuery {
                 $r = in_array($a, $b);
                 break;
 
+            case '$elemMatch' :
+            // $a es el coso a buscar
+            // $b es lo que se está buscando
+                if (! is_array($b)) {
+                    throw new \InvalidArgumentException('Invalid argument for $in option must be array');
+                }
+                $result = array_filter($a, function ($object) use($b) {
+                    return array_intersect($object, $b);
+                });
+                $r = (bool) $result;
+                break;
+
             case '$has' :
                 if (is_array($b))
                     throw new \InvalidArgumentException('Invalid argument for $has array not supported');
