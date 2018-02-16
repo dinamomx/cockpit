@@ -158,6 +158,10 @@
             App.media.select(function(selected) {
 
                 $this.image.path = selected[0];
+                $this.image.colors = selected[0].colors
+                $this.image.height = selected[0].height
+                $this.image.width = selected[0].width
+                $this.image._id = selected[0]._id
                 $this.$setValue($this.image);
                 $this.update();
 
@@ -171,6 +175,10 @@
                 if (Array.isArray(assets) && assets[0]) {
 
                     $this.image.path = ASSETS_URL.replace(SITE_URL, '')+assets[0].path;
+                    $this.image.colors = assets[0].colors
+                    $this.image.height = assets[0].height
+                    $this.image.width = assets[0].width
+                    $this.image._id = assets[0]._id
                     $this.$setValue($this.image);
                     $this.update();
                 }
