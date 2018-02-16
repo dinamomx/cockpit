@@ -1874,9 +1874,13 @@ riot.tag2('field-gallery', '<div ref="uploadprogress" class="uk-margin uk-hidden
             App.media.select(function(selected) {
 
                 var images = [];
-
                 selected.forEach(function(path){
-                    images.push({meta:{title:''}, path:path});
+                    images.push({
+                        meta:{
+                            title:''
+                        },
+                        path: path,
+                    });
                 });
 
                 $this.$setValue($this.images.concat(images));
@@ -1894,13 +1898,14 @@ riot.tag2('field-gallery', '<div ref="uploadprogress" class="uk-margin uk-hidden
                     var images = [];
 
                     assets.forEach(function(asset){
-
                         if (asset.mime.match(/^image\//)) {
                             images.push({
                                 meta:{
                                     title:'',
-                                    asset: asset._id,
+                                    _id: asset._id,
                                     colors: asset.colors,
+                                    height: asset.height,
+                                    width: asset.width,
                                 },
                                 path: ASSETS_URL.replace(SITE_URL, '')+asset.path
                             });
@@ -1932,8 +1937,11 @@ riot.tag2('field-gallery', '<div ref="uploadprogress" class="uk-margin uk-hidden
             App.assets.select(function(assets){
 
                 if (Array.isArray(assets) && assets[0]) {
-
                     image.path = ASSETS_URL.replace(SITE_URL, '')+assets[0].path;
+                    image.meta.colors = assets[0].colors
+                    image.meta.height = assets[0].height
+                    image.meta.width = assets[0].width
+                    image.meta._id = assets[0]._id
                     $this.$setValue($this.images);
                     $this.update();
                 }
