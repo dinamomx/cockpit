@@ -2121,7 +2121,7 @@ riot.tag2('field-image', '<div ref="uploadprogress" class="uk-margin uk-hidden">
 
         this.showMeta = function() {
 
-            this._meta = this.image.meta;
+            this._meta = this.image.meta || {};
 
             setTimeout(function() {
                 UIkit.modal($this.refs.modalmeta, {modal:false}).show().one('close.uk.modal', function(){
@@ -2985,7 +2985,7 @@ riot.tag2('field-select', '<select ref="input" class="uk-width-1-1 {opts.cls}" b
 
             this.options = (typeof(opts.options) === 'string' ? opts.options.split(',') : opts.options || [])
                 .map(function(option) {
-                    return option.trim();
+                    return option.toString().trim();
                 });
 
             this.refs.input.value = this.root.$value;
